@@ -1,38 +1,53 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="lab1 task 1" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/lab1 task 1" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/lab1 task 1" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
-		</Compiler>
-		<Unit filename="main.cpp" />
-		<Extensions />
-	</Project>
-</CodeBlocks_project_file>
+#include <iostream>
+
+using namespace std;
+int summation(int a[] ,int b);
+int maximum(int a[] ,int b);
+
+int main()
+{
+
+    int n;
+
+    cout<<"enter a number ";
+
+    cin>>n;
+
+   int num[n];
+
+    for(int i=0; i<n; i++)
+    cin>> num[i];
+
+    int summ = summation(num, n);
+    int maxxx = maximum(num, n);
+
+    cout << summ <<endl;
+    cout << maxxx;
+
+    return 0;
+}
+z
+
+int summation(int a[] ,int b){
+
+    int sum = 0;
+
+for(int i=0; i < b ; i++)
+{
+    sum += a[i];
+}
+    return sum;
+
+}
+
+int maximum(int a[] , int b){
+
+    int maxx = a[0];
+
+for (int i=1; i < b ; i++)
+{
+    if (a[i] > maxx){
+        maxx = a[i];
+    }
+}
+    return maxx;
