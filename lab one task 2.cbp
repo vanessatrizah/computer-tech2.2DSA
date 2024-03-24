@@ -1,40 +1,130 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="lab one task 2" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/lab one task 2" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/lab one task 2" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
-		</Compiler>
-		<Unit filename="main.cpp" />
-		<Extensions>
-			<lib_finder disable_auto="1" />
-		</Extensions>
-	</Project>
-</CodeBlocks_project_file>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int maxi_students = 40;
+
+struct Students {
+    string name;
+    string registration_number; // Changed to string
+    int age;
+};
+
+struct course {
+    string course_name, course_code;
+};
+
+struct grade {
+    int mark;
+    char Grade;
+};
+
+void addStudents(Students students[], int& numStudents); // Changed function name
+void editStudent(Students students[], int numStudents);
+void addMarks(Students students[], int numStudents);
+char calculateGrade(int mark);
+
+int main() {
+    Students students[maxi_students];
+    int numStudents = 0;
+    int switc;
+    cout << "Enter number btn 1 - 3";
+    cin >> switc;
+
+    switch (switc) {
+        case 1: {
+            addStudents(students, numStudents); // Corrected argument
+            break;
+        }
+        case 2: {
+            editStudent(students, numStudents);
+            break;
+        }
+        case 3: {
+            addMarks(students, numStudents);
+            break;
+        }
+        default:
+            break;
+    }
+
+    return 0;
+}
+
+void addStudents(Students students[], int& numStudents) {
+    if (numStudents < maxi_students) {
+        Students newStudent;
+        cout << "Enter name" << endl;
+        cin.ignore(); // Ignore newline character
+        getline(cin, newStudent.name);
+        cout << "Enter age" << endl;
+        cin >> newStudent.age;
+        cout << "Enter registration number" << endl;
+        cin >> newStudent.registration_number;
+
+        course Course;
+        cout << "Enter course name:";
+        cin >> Course.course_name;
+        cout << "\nEnter course code: ";
+        cin >> Course.course_code;
+
+        students[numStudents++] = newStudent;
+        cout << "Student added successfully.\n";
+    } else {
+        cout << "Maximum number of students reached.\n";
+    }
+}
+
+void editStudent(Students students[], int numStudents) {
+    string regNum;
+    cout << "Enter registration number of student to edit: ";
+    cin >> regNum;
+
+    for (int i = 0; i < numStudents; ++i) {
+        if (students[i].registration_number == regNum) {
+            cout << "Enter new name: ";
+            cin.ignore(); // Ignore newline character
+            getline(cin, students[i].name);
+            cout << "Enter new age: ";
+            cin >> students[i].age;
+            cout << "Student details updated successfully.\n";
+            return;
+        }
+    }
+
+    cout << "Student not found.\n";
+}
+
+void addMarks(Students students[], int numStudents) {
+    string regNum;
+    cout << "Enter registration number of student to edit: ";
+    cin >> regNum;
+    grade grade1;
+    for (int i = 0; i < numStudents; ++i) {
+        if (students[i].registration_number == regNum) {
+            cout << "Enter mark" << endl;
+            cin >> grade1.mark;
+            // Print calculated grade
+            cout << "Grade: " << calculateGrade(grade1.mark) << endl;
+            return;
+        }
+    }
+    cout << "Student not found.\n";
+}
+
+char calculateGrade(int mark) {
+    if (mark > 69) {
+        return 'A';
+    } else if (mark > 59) {
+        return 'B';
+    } else if (mark > 49) {
+        return 'C';
+    } else if (mark > 39) { // Changed condition to mark > 39
+        return 'D';
+    } else {
+        return 'E';
+    }
+}
+
+
