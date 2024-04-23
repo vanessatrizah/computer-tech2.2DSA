@@ -1,40 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="arrays quiz qsn1" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/arrays quiz qsn1" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/arrays quiz qsn1" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
-		</Compiler>
-		<Unit filename="main.cpp" />
-		<Extensions>
-			<lib_finder disable_auto="1" />
-		</Extensions>
-	</Project>
-</CodeBlocks_project_file>
+#include <iostream>
+#include <vector>
+
+  int removeReplicas(std::vector<int>& nums) {
+    if (nums.empty()) {//references vector of intergers and returns new lengh.
+        return 0;
+    }
+
+    int k = 0;
+
+    for (int i = 1; i < nums.size(); ++i) {
+        if (nums[i] != nums[k]) {
+            // Move the unique element to the next position
+            nums[++k] = nums[i];
+        }
+    }
+
+    // The new length is the unique index + 1
+    return k + 1;
+}
+
+int main() {
+    // Example usage
+    std::vector<int> nums = {1, 1, 2, 2, 2, 3, 4, 4, 5}; //initialise the vector
+
+    int newLength = removeReplicas(nums);
+
+    std::cout << "New Length: " << newLength << std::endl;
+    std::cout << "Updated Array: ";
+    for (int i = 0; i < newLength; ++i) {
+        std::cout << nums[i] << " ";
+    }
+
+    return 0;
+}
+
+
